@@ -382,22 +382,41 @@ h1 {
   background: var(--soft);
 }
 
+.service-heading-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.service-cta {
+  flex: 0 0 auto;
+  margin-top: 8px;
+  color: #ffffff;
+  box-shadow: 0 16px 32px rgba(17, 161, 143, 0.16);
+}
+
 .service-list {
   margin-top: 42px;
-  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  border: 1px solid var(--line);
+  background: var(--line);
 }
 
 .service-item {
   display: grid;
-  grid-template-columns: 72px minmax(0, 1fr) auto;
-  gap: clamp(22px, 4vw, 54px);
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 22px;
   align-items: start;
-  padding: 34px 0;
-  border-bottom: 1px solid var(--line);
+  min-height: 242px;
+  padding: 28px;
+  background: #ffffff;
 }
 
 .service-body {
-  max-width: 980px;
+  max-width: 560px;
 }
 
 .service-kicker {
@@ -408,39 +427,18 @@ h1 {
 }
 
 .service-match {
-  display: grid;
-  grid-template-columns: 82px minmax(0, 1fr);
-  gap: 14px;
-  max-width: 780px;
-  margin-top: 14px;
+  max-width: 520px;
+  margin-top: 16px;
   color: #39414b;
   font-size: 14px;
   line-height: 1.62;
 }
 
 .service-match span {
+  display: block;
+  margin-bottom: 3px;
   color: var(--ink);
   font-weight: 760;
-}
-
-.service-item a {
-  display: grid;
-  place-items: center;
-  min-width: 50px;
-  height: 40px;
-  margin-top: 8px;
-  padding: 0 14px;
-  color: #ffffff;
-  border-radius: 999px;
-  background: var(--night-2);
-  font-size: 13px;
-  font-weight: 760;
-  transition: transform 170ms ease, background 170ms ease;
-}
-
-.service-item a:hover {
-  transform: translateX(3px);
-  background: var(--teal);
 }
 
 .pricing-grid {
@@ -742,6 +740,15 @@ h1 {
     grid-template-columns: 1fr;
   }
 
+  .service-heading-row {
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .service-list {
+    grid-template-columns: 1fr;
+  }
+
   .launch-strip div {
     min-height: 92px;
     padding: 20px 22px;
@@ -751,6 +758,11 @@ h1 {
   .service-item {
     grid-template-columns: 42px 1fr;
     gap: 18px;
+  }
+
+  .service-item {
+    min-height: auto;
+    padding: 24px 22px;
   }
 
   .stage-list article {
@@ -769,20 +781,12 @@ h1 {
     grid-template-columns: 1fr;
   }
 
-  .service-item a {
-    grid-column: 2;
-    justify-self: start;
-    min-width: 82px;
-  }
-
   .service-kicker {
     font-size: 12px;
     line-height: 1.45;
   }
 
   .service-match {
-    grid-template-columns: 1fr;
-    gap: 4px;
     margin-top: 12px;
     font-size: 13px;
   }
