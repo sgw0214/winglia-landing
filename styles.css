@@ -194,7 +194,6 @@ h2,
 
 p,
 .service-item p,
-.output-lines p,
 .form-status {
   text-wrap: pretty;
 }
@@ -392,7 +391,6 @@ h1 {
 .stage-list p,
 .service-item p,
 .pricing-grid p,
-.output-lines p,
 .contact-section p {
   margin: 8px 0 0;
   color: var(--muted);
@@ -562,41 +560,6 @@ h1 {
   font-size: clamp(27px, 2.6vw, 34px);
   font-weight: 820;
   line-height: 1.12;
-}
-
-.output-section {
-  color: #f7f7f4;
-  background: var(--night-2);
-}
-
-.output-section .eyebrow {
-  color: #62cbbb;
-}
-
-.output-section .section-heading p,
-.output-section .output-lines p {
-  color: rgba(247, 247, 244, 0.72);
-}
-
-.output-lines {
-  max-width: 1060px;
-  margin-top: 38px;
-  border-top: 1px solid rgba(255, 255, 255, 0.18);
-}
-
-.output-lines p {
-  display: grid;
-  grid-template-columns: 170px 1fr;
-  gap: 24px;
-  margin: 0;
-  padding: 26px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
-  font-size: 17px;
-}
-
-.output-lines span {
-  color: #ffffff;
-  font-weight: 760;
 }
 
 .contact-section {
@@ -921,11 +884,6 @@ h1 {
   .service-match {
     margin-top: 10px;
     font-size: 13px;
-  }
-
-  .output-lines p {
-    grid-template-columns: 1fr;
-    gap: 8px;
   }
 
   .site-footer {
