@@ -1,9 +1,15 @@
 # Local verification artifacts
 output/
+node_modules/
 
 # Platform/project local metadata
 .vercel/
 .netlify/
+
+# Environment variables
+.env
+.env.*
+!.env.example
 
 # OS/editor noise
 .DS_Store

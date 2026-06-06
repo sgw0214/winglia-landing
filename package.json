@@ -1,0 +1,12 @@
+{
+  "name": "winglia-landing",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "check": "node --check api/apply.js && node --check script.js"
+  },
+  "dependencies": {
+    "pg": "^8.21.0"
+  }
+}
