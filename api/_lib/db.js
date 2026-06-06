@@ -1,11 +1,17 @@
 const { Pool } = require("pg");
 
 const SERVICE_LABELS = {
-  lead_response: "리드·문의 응답 관리",
-  sheets_ops: "Excel·Google Sheets 업무 정리",
-  settlement_audit: "정산·데이터 예외 점검",
-  document_expiry: "증빙·문서 만료 관리",
-  automation_monitoring: "자동화 모니터링",
+  process_design: "L1 업무 진단·운영 설계",
+  data_cleanup: "L2 데이터·엑셀 정리",
+  request_flow: "L3 요청·문의 흐름 관리",
+  audit_control: "L4 정산·증빙·예외 검증",
+  workflow_automation: "L5 반복 처리 자동화",
+  system_operations: "L6 업무 시스템 개발·운영",
+  lead_response: "L3 요청·문의 흐름 관리",
+  sheets_ops: "L2 데이터·엑셀 정리",
+  settlement_audit: "L4 정산·증빙·예외 검증",
+  document_expiry: "L4 정산·증빙·예외 검증",
+  automation_monitoring: "L5 반복 처리 자동화",
   undecided: "상담 후 결정",
 };
 
