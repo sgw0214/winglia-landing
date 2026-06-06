@@ -6,9 +6,11 @@ Winglia 업무 의뢰 랜딩 페이지입니다. 신청 폼은 Vercel Serverless
 
 - 정적 페이지: `index.html`, `styles.css`, `script.js`
 - 신청 API: `api/apply.js`
+- 관리자 화면: `admin/index.html`
+- 관리자 API: `api/admin/*`
 - DB 스키마: `db/schema.sql`
 - DB 연결: `DATABASE_URL`
-- 선택 메일 발송: `RESEND_API_KEY`, `MAIL_FROM`, `OWNER_EMAIL`
+- 관리자 인증: `ADMIN_PASSWORD_HASH`, `ADMIN_SESSION_SECRET`
 
 ## Vercel Postgres 설정
 
@@ -22,14 +24,17 @@ Winglia 업무 의뢰 랜딩 페이지입니다. 신청 폼은 Vercel Serverless
 
 API는 최초 신청 시 `applications` 테이블과 인덱스를 자동 생성합니다. 수동 생성이 필요하면 `db/schema.sql`을 실행하면 됩니다.
 
-## 메일 알림
+## 관리자 모드
 
-신청 내용은 DB에 항상 저장됩니다. 아래 환경변수가 있으면 운영자에게 접수 알림 메일도 발송합니다.
+신청 내용은 DB에 저장되고 `/admin`에서 확인합니다. 관리자 화면에서는 접수 목록, 상태, 처리 메모, 다음 액션을 관리할 수 있습니다.
 
 ```env
-OWNER_EMAIL="you@example.com"
-MAIL_FROM="Winglia <hello@your-domain.com>"
-RESEND_API_KEY="re_..."
+ADMIN_SESSION_SECRET="랜덤 문자열"
+ADMIN_PASSWORD_HASH="scrypt:SALT_HEX:HASH_HEX"
 ```
 
-`MAIL_FROM`은 Resend에서 인증된 도메인 주소를 사용하는 것이 좋습니다.
+비밀번호 해시는 `api/_lib/auth.js`의 `hashPassword()`와 같은 `scrypt` 형식입니다. 운영 환경에서는 평문 `ADMIN_PASSWORD` 대신 `ADMIN_PASSWORD_HASH` 사용을 권장합니다.
+
+## 내보내기
+
+관리자 로그인 후 `/api/admin/export`에서 CSV를 내려받을 수 있습니다. Excel에서는 CSV를 열어 신청대장처럼 사용할 수 있습니다.

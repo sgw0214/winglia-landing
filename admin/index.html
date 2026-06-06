@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Winglia Admin</title>
+    <link rel="stylesheet" href="/admin/admin.css" />
+  </head>
+  <body>
+    <main class="admin-shell">
+      <section class="login-view" data-login-view hidden>
+        <div class="login-panel">
+          <a class="brand" href="/" aria-label="Winglia 홈">
+            <span class="brand-mark" aria-hidden="true">W</span>
+            <span>Winglia Admin</span>
+          </a>
+          <h1>접수 현황을 확인합니다.</h1>
+          <p>관리자 비밀번호로 로그인하면 신청 목록, 처리 상태, 메모를 관리할 수 있습니다.</p>
+          <form data-login-form>
+            <label>
+              <span>관리자 비밀번호</span>
+              <input name="password" type="password" autocomplete="current-password" required />
+            </label>
+            <button type="submit">로그인</button>
+            <p class="status-text" data-login-status aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+
+      <section class="workspace" data-workspace hidden>
+        <header class="topbar">
+          <a class="brand" href="/" aria-label="Winglia 홈">
+            <span class="brand-mark" aria-hidden="true">W</span>
+            <span>Winglia Admin</span>
+          </a>
+          <div class="topbar-actions">
+            <button class="ghost-button" type="button" data-refresh-button>새로고침</button>
+            <a class="ghost-button" href="/api/admin/export" data-export-link>CSV 다운로드</a>
+            <button class="ghost-button" type="button" data-logout-button>로그아웃</button>
+          </div>
+        </header>
+
+        <section class="summary-strip" aria-label="접수 요약">
+          <div>
+            <span>전체</span>
+            <strong data-count-total>0</strong>
+          </div>
+          <div>
+            <span>신규</span>
+            <strong data-count-new>0</strong>
+          </div>
+          <div>
+            <span>검토 중</span>
+            <strong data-count-reviewing>0</strong>
+          </div>
+          <div>
+            <span>진행 중</span>
+            <strong data-count-progress>0</strong>
+          </div>
+        </section>
+
+        <section class="toolbar" aria-label="필터">
+          <label>
+            <span>상태</span>
+            <select data-status-filter>
+              <option value="all">전체</option>
+              <option value="new">신규</option>
+              <option value="reviewing">검토 중</option>
+              <option value="contacted">연락 완료</option>
+              <option value="in_progress">진행 중</option>
+              <option value="done">완료</option>
+              <option value="rejected">보류</option>
+            </select>
+          </label>
+          <label class="search-field">
+            <span>검색</span>
+            <input data-search-input type="search" placeholder="이름, 조직, 이메일, 문의내용" />
+          </label>
+        </section>
+
+        <section class="admin-grid">
+          <div class="list-pane">
+            <div class="pane-heading">
+              <h1>신청 목록</h1>
+              <p data-list-status>접수 데이터를 불러오는 중입니다.</p>
+            </div>
+            <div class="application-list" data-application-list></div>
+          </div>
+
+          <aside class="detail-pane" data-detail-pane>
+            <div class="empty-detail">
+              <h2>신청을 선택하세요.</h2>
+              <p>왼쪽 목록에서 항목을 선택하면 연락처, 문의내용, 처리 메모를 확인할 수 있습니다.</p>
+            </div>
+          </aside>
+        </section>
+      </section>
+    </main>
+
+    <script src="/admin/admin.js"></script>
+  </body>
+</html>

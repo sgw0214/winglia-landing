@@ -4,7 +4,7 @@
   "private": true,
   "type": "commonjs",
   "scripts": {
-    "check": "node --check api/apply.js && node --check script.js"
+    "check": "node scripts/check-js.js"
   },
   "dependencies": {
     "pg": "^8.21.0"
