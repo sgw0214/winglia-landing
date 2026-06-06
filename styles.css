@@ -1,4 +1,4 @@
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+@import url("https://cdn.jsdelivr.net/npm/wanted-sans@1.0.3/fonts/webfonts/variable/split/WantedSansVariable.min.css");
 
 :root {
   --ink: #15171c;
@@ -25,7 +25,7 @@ body {
   margin: 0;
   color: var(--ink);
   background: var(--paper);
-  font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: "Wanted Sans Variable", "Wanted Sans", "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   line-height: 1.58;
   word-break: keep-all;
   overflow-wrap: break-word;
@@ -329,8 +329,23 @@ h1 {
   border-top: 1px solid var(--line);
 }
 
+.stage-section .section-heading {
+  max-width: 760px;
+}
+
+.stage-section .section-heading h2 {
+  font-size: clamp(28px, 3.25vw, 48px);
+  font-weight: 720;
+  line-height: 1.12;
+}
+
+.stage-section .section-heading p:not(.eyebrow) {
+  max-width: 640px;
+  font-size: 16px;
+}
+
 .stage-list {
-  margin-top: 46px;
+  margin-top: 38px;
   border-top: 1px solid var(--line);
 }
 
@@ -344,8 +359,9 @@ h1 {
 
 .stage-list h3 {
   margin: 0;
-  font-size: clamp(24px, 2.5vw, 34px);
-  line-height: 1.12;
+  font-size: clamp(20px, 1.85vw, 27px);
+  font-weight: 720;
+  line-height: 1.22;
 }
 
 .stage-list article > div {
@@ -358,7 +374,7 @@ h1 {
 .stage-list p {
   max-width: 560px;
   margin: 2px 0 0;
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.75;
 }
 
@@ -717,7 +733,8 @@ h1 {
 
   .stage-list h3 {
     margin: 0;
-    font-size: 22px;
+    font-size: 19px;
+    line-height: 1.26;
   }
 
   .field-pair {
