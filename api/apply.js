@@ -157,7 +157,7 @@ module.exports = async function handler(req, res) {
     return json(res, 200, {
       ok: true,
       id: applicationId,
-      message: "접수되었습니다. 확인 후 48시간 안에 안내드리겠습니다.",
+      message: "접수되었습니다. 48시간 안에 가능한 범위와 첫 산출물을 안내드리겠습니다.",
       notificationStatus: "admin_queue",
     });
   } catch (error) {

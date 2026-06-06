@@ -45,7 +45,7 @@ if (applyForm) {
     submitButton.disabled = true;
     submitButton.textContent = "전송 중";
     status.className = "form-status";
-    status.textContent = "신청 내용을 저장하고 있습니다.";
+    status.textContent = "업무 내용을 접수하고 있습니다.";
 
     try {
       const response = await fetch("/api/apply", {
@@ -61,7 +61,7 @@ if (applyForm) {
 
       applyForm.reset();
       status.className = "form-status success";
-      status.textContent = result.message || "접수되었습니다. 확인 후 48시간 안에 안내드리겠습니다.";
+      status.textContent = result.message || "접수되었습니다. 48시간 안에 가능한 범위와 첫 산출물을 안내드리겠습니다.";
     } catch (error) {
       status.className = "form-status error";
       status.textContent = error.message || "잠시 후 다시 시도해주세요.";

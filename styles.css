@@ -138,6 +138,19 @@ p {
   letter-spacing: 0;
 }
 
+h2,
+.hero-line,
+.launch-strip strong {
+  text-wrap: balance;
+}
+
+p,
+.service-item p,
+.output-lines p,
+.form-status {
+  text-wrap: pretty;
+}
+
 h1 {
   margin: 0;
   max-width: 100%;
@@ -217,7 +230,7 @@ h1 {
 
 .launch-strip div {
   min-height: 106px;
-  padding: 24px 7vw;
+  padding: 24px clamp(22px, 4vw, 72px);
   background: #ffffff;
 }
 
@@ -248,7 +261,7 @@ h1 {
 }
 
 .section-heading {
-  max-width: 760px;
+  max-width: 820px;
 }
 
 .section-heading.wide {
@@ -266,6 +279,7 @@ h1 {
   margin: 18px 0 0;
   color: var(--muted);
   font-size: 17px;
+  max-width: 720px;
 }
 
 .process-list {
@@ -413,7 +427,7 @@ h1 {
 .contact-section h2 {
   max-width: 860px;
   margin: 0;
-  font-size: clamp(36px, 5.2vw, 72px);
+  font-size: clamp(34px, 5vw, 68px);
   font-weight: 790;
   line-height: 1.04;
 }
