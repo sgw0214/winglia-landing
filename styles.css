@@ -454,6 +454,20 @@ h1 {
 
 .service-section {
   background: var(--soft);
+  padding-top: 76px;
+  padding-bottom: 78px;
+}
+
+.service-section .section-heading h2 {
+  max-width: 760px;
+  font-size: clamp(32px, 3.7vw, 54px);
+  line-height: 1.04;
+}
+
+.service-section .section-heading p:not(.eyebrow) {
+  max-width: 760px;
+  margin-top: 14px;
+  font-size: 16px;
 }
 
 .service-heading-row {
@@ -465,47 +479,58 @@ h1 {
 
 .service-cta {
   flex: 0 0 auto;
-  margin-top: 8px;
+  min-height: 44px;
+  margin-top: 4px;
+  padding: 0 20px;
   color: #ffffff;
   box-shadow: 0 16px 32px rgba(17, 161, 143, 0.16);
 }
 
 .service-list {
-  margin-top: 42px;
+  margin-top: 30px;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1px;
-  border: 1px solid var(--line);
-  background: var(--line);
+  column-gap: clamp(42px, 7vw, 96px);
+  row-gap: 0;
 }
 
 .service-item {
   display: grid;
-  grid-template-columns: 48px minmax(0, 1fr);
-  gap: 22px;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 16px;
   align-items: start;
-  min-height: 242px;
-  padding: 28px;
-  background: #ffffff;
+  min-height: auto;
+  padding: 20px 0 24px;
+  border-top: 1px solid var(--line);
+  background: transparent;
+}
+
+.service-item:nth-last-child(-n+2) {
+  border-bottom: 1px solid var(--line);
 }
 
 .service-body {
-  max-width: 560px;
+  max-width: none;
 }
 
 .service-kicker {
-  margin: 0 0 8px;
+  margin: 0 0 6px;
   color: var(--teal);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 760;
+}
+
+.service-item h3 {
+  font-size: 20px;
+  line-height: 1.18;
 }
 
 .service-match {
   max-width: 520px;
-  margin-top: 16px;
+  margin-top: 10px;
   color: #39414b;
-  font-size: 14px;
-  line-height: 1.62;
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 .service-match span {
@@ -828,7 +853,20 @@ h1 {
 
   .service-heading-row {
     flex-direction: column;
-    gap: 22px;
+    gap: 18px;
+  }
+
+  .service-section {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  .service-section .section-heading h2 {
+    font-size: clamp(30px, 9.2vw, 40px);
+  }
+
+  .service-section .section-heading p:not(.eyebrow) {
+    font-size: 15px;
   }
 
   .service-list {
@@ -848,7 +886,15 @@ h1 {
 
   .service-item {
     min-height: auto;
-    padding: 24px 22px;
+    padding: 20px 0 22px;
+  }
+
+  .service-item:nth-last-child(-n+2) {
+    border-bottom: 0;
+  }
+
+  .service-item:last-child {
+    border-bottom: 1px solid var(--line);
   }
 
   .stage-list article {
@@ -873,7 +919,7 @@ h1 {
   }
 
   .service-match {
-    margin-top: 12px;
+    margin-top: 10px;
     font-size: 13px;
   }
 
