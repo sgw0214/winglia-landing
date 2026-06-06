@@ -1,0 +1,11 @@
+# Local verification artifacts
+output/
+
+# Platform/project local metadata
+.vercel/
+.netlify/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/
