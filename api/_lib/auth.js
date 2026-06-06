@@ -1,4 +1,5 @@
 const crypto = require("crypto");
+const { withClient } = require("./db");
 const { clean, json } = require("./http");
 
 const COOKIE_NAME = "winglia_admin";
@@ -31,10 +32,7 @@ function hashPassword(password, saltHex) {
   return `scrypt:${salt}:${hash}`;
 }
 
-function verifyPassword(password) {
-  const passwordHash = process.env.ADMIN_PASSWORD_HASH;
-  const plainPassword = process.env.ADMIN_PASSWORD;
-
+function verifyPasswordHash(password, passwordHash) {
   if (passwordHash) {
     const [kind, salt, expectedHash] = passwordHash.split(":");
     if (kind !== "scrypt" || !salt || !expectedHash) return false;
@@ -42,11 +40,48 @@ function verifyPassword(password) {
     return timingSafeEqualText(actualHash, expectedHash);
   }
 
+  return false;
+}
+
+function verifyPassword(password) {
+  const passwordHash = process.env.ADMIN_PASSWORD_HASH;
+  const plainPassword = process.env.ADMIN_PASSWORD;
+
+  if (passwordHash) return verifyPasswordHash(password, passwordHash);
+
   if (plainPassword) {
     return timingSafeEqualText(password, plainPassword);
   }
 
   throw new Error("ADMIN_PASSWORD_HASH is not configured.");
+}
+
+async function getStoredPasswordHash() {
+  return await withClient(async (client) => {
+    const result = await client.query("select value from admin_settings where key = 'password_hash'");
+    return result.rows[0]?.value || "";
+  });
+}
+
+async function verifyAdminPassword(password) {
+  const storedPasswordHash = await getStoredPasswordHash();
+  if (storedPasswordHash) return verifyPasswordHash(password, storedPasswordHash);
+  return verifyPassword(password);
+}
+
+async function setAdminPassword(password) {
+  const passwordHash = hashPassword(password);
+  await withClient((client) =>
+    client.query(
+      `
+        insert into admin_settings (key, value, updated_at)
+        values ('password_hash', $1, now())
+        on conflict (key)
+        do update set value = excluded.value, updated_at = now()
+      `,
+      [passwordHash]
+    )
+  );
 }
 
 function isSecureRequest(req) {
@@ -118,5 +153,8 @@ module.exports = {
   createSessionCookie,
   hashPassword,
   requireAdmin,
+  setAdminPassword,
+  verifyAdminPassword,
   verifyPassword,
+  verifyPasswordHash,
 };

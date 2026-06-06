@@ -33,7 +33,7 @@ ADMIN_SESSION_SECRET="랜덤 문자열"
 ADMIN_PASSWORD_HASH="scrypt:SALT_HEX:HASH_HEX"
 ```
 
-비밀번호 해시는 `api/_lib/auth.js`의 `hashPassword()`와 같은 `scrypt` 형식입니다. 운영 환경에서는 평문 `ADMIN_PASSWORD` 대신 `ADMIN_PASSWORD_HASH` 사용을 권장합니다.
+초기 로그인은 `ADMIN_PASSWORD_HASH`를 사용합니다. 로그인 후 관리자 화면의 설정에서 비밀번호를 바꾸면 새 해시가 DB의 `admin_settings` 테이블에 저장되고, 이후 로그인은 DB 저장값을 우선 사용합니다.
 
 ## 내보내기
 

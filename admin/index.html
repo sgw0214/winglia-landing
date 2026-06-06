@@ -35,6 +35,7 @@
             <span>Winglia Admin</span>
           </a>
           <div class="topbar-actions">
+            <button class="ghost-button" type="button" data-settings-button>설정</button>
             <button class="ghost-button" type="button" data-refresh-button>새로고침</button>
             <a class="ghost-button" href="/api/admin/export" data-export-link>CSV 다운로드</a>
             <button class="ghost-button" type="button" data-logout-button>로그아웃</button>
@@ -77,6 +78,31 @@
             <span>검색</span>
             <input data-search-input type="search" placeholder="이름, 조직, 이메일, 문의내용" />
           </label>
+        </section>
+
+        <section class="settings-panel" data-settings-panel hidden>
+          <div class="settings-copy">
+            <h1>관리자 설정</h1>
+            <p>비밀번호를 바꾸면 현재 세션은 종료되고 새 비밀번호로 다시 로그인해야 합니다.</p>
+          </div>
+          <form class="password-form" data-password-form>
+            <label>
+              <span>현재 비밀번호</span>
+              <input name="currentPassword" type="password" autocomplete="current-password" required />
+            </label>
+            <label>
+              <span>새 비밀번호</span>
+              <input name="newPassword" type="password" autocomplete="new-password" minlength="12" required />
+            </label>
+            <label>
+              <span>새 비밀번호 확인</span>
+              <input name="confirmPassword" type="password" autocomplete="new-password" minlength="12" required />
+            </label>
+            <div class="settings-actions">
+              <button type="submit">비밀번호 변경</button>
+              <span class="save-status" data-password-status aria-live="polite"></span>
+            </div>
+          </form>
         </section>
 
         <section class="admin-grid">

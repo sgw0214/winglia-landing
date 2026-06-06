@@ -71,6 +71,14 @@ async function ensureSchema(client) {
     )
   `);
 
+  await client.query(`
+    create table if not exists admin_settings (
+      key text primary key,
+      value text not null,
+      updated_at timestamptz not null default now()
+    )
+  `);
+
   await client.query("alter table applications add column if not exists updated_at timestamptz not null default now()");
   await client.query("alter table applications add column if not exists admin_note text not null default ''");
   await client.query("alter table applications add column if not exists next_action text not null default ''");

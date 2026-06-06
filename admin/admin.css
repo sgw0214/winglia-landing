@@ -235,6 +235,42 @@ button:disabled {
   background: #ffffff;
 }
 
+.settings-panel {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.7fr) minmax(420px, 1.3fr);
+  gap: 28px;
+  padding: 26px 28px;
+  border-bottom: 1px solid var(--line);
+  background: #ffffff;
+}
+
+.settings-copy h1 {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.18;
+}
+
+.settings-copy p {
+  max-width: 460px;
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.password-form {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  align-items: end;
+}
+
+.settings-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  grid-column: 1 / -1;
+}
+
 .admin-grid {
   display: grid;
   grid-template-columns: minmax(420px, 0.95fr) minmax(460px, 1.05fr);
@@ -428,6 +464,11 @@ button:disabled {
     grid-template-columns: 1fr;
   }
 
+  .settings-panel,
+  .password-form {
+    grid-template-columns: 1fr;
+  }
+
   .list-pane {
     border-right: 0;
   }
@@ -456,6 +497,7 @@ button:disabled {
   }
 
   .toolbar,
+  .settings-panel,
   .pane-heading,
   .application-row,
   .empty-detail,

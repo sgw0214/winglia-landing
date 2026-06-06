@@ -25,6 +25,12 @@ create table if not exists applications (
   user_agent text
 );
 
+create table if not exists admin_settings (
+  key text primary key,
+  value text not null,
+  updated_at timestamptz not null default now()
+);
+
 alter table applications
   add column if not exists updated_at timestamptz not null default now();
 

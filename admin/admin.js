@@ -9,6 +9,10 @@ const statusFilter = document.querySelector("[data-status-filter]");
 const searchInput = document.querySelector("[data-search-input]");
 const refreshButton = document.querySelector("[data-refresh-button]");
 const logoutButton = document.querySelector("[data-logout-button]");
+const settingsButton = document.querySelector("[data-settings-button]");
+const settingsPanel = document.querySelector("[data-settings-panel]");
+const passwordForm = document.querySelector("[data-password-form]");
+const passwordStatus = document.querySelector("[data-password-status]");
 
 const counts = {
   total: document.querySelector("[data-count-total]"),
@@ -270,6 +274,9 @@ detailPane.addEventListener("submit", async (event) => {
 
 statusFilter.addEventListener("change", loadApplications);
 refreshButton.addEventListener("click", loadApplications);
+settingsButton.addEventListener("click", () => {
+  settingsPanel.hidden = !settingsPanel.hidden;
+});
 
 searchInput.addEventListener("input", () => {
   window.clearTimeout(state.debounceTimer);
@@ -279,6 +286,41 @@ searchInput.addEventListener("input", () => {
 logoutButton.addEventListener("click", async () => {
   await api("/api/admin/logout", { method: "POST", body: "{}" }).catch(() => {});
   showLogin();
+});
+
+passwordForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const button = passwordForm.querySelector("button");
+  const formData = new FormData(passwordForm);
+
+  button.disabled = true;
+  passwordStatus.className = "save-status";
+  passwordStatus.textContent = "변경 중입니다.";
+
+  try {
+    const result = await api("/api/admin/password", {
+      method: "POST",
+      body: JSON.stringify({
+        currentPassword: formData.get("currentPassword"),
+        newPassword: formData.get("newPassword"),
+        confirmPassword: formData.get("confirmPassword"),
+      }),
+    });
+
+    passwordForm.reset();
+    passwordStatus.className = "save-status success";
+    passwordStatus.textContent = result.message;
+
+    window.setTimeout(() => {
+      showLogin();
+      passwordStatus.textContent = "";
+    }, 900);
+  } catch (error) {
+    passwordStatus.className = "save-status error";
+    passwordStatus.textContent = error.message;
+  } finally {
+    button.disabled = false;
+  }
 });
 
 checkSession();
