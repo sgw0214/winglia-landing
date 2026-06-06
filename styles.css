@@ -123,9 +123,11 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: min(760px, 100%);
+  align-items: center;
+  width: 100%;
   min-height: calc(100svh - 128px);
   padding: clamp(80px, 10vh, 132px) 7vw 72px;
+  text-align: center;
 }
 
 .eyebrow {
@@ -729,7 +731,7 @@ h1 {
   }
 
   .hero-line {
-    max-width: 280px;
+    max-width: 320px;
     font-size: 20px;
   }
 
