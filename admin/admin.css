@@ -449,6 +449,18 @@ button:disabled {
   overflow-wrap: anywhere;
 }
 
+.contact-link {
+  color: var(--teal-dark);
+  text-decoration: underline;
+  text-decoration-color: rgba(12, 129, 117, 0.32);
+  text-underline-offset: 3px;
+}
+
+.contact-link:hover {
+  color: var(--teal);
+  text-decoration-color: currentColor;
+}
+
 .message-box {
   margin-top: 12px;
   padding: 12px 14px;

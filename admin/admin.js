@@ -46,6 +46,18 @@ function escapeHtml(value) {
     .replace(/"/g, "&quot;");
 }
 
+function buildMailtoHref(item) {
+  const email = String(item.email || "").replace(/\s/g, "").replace(/[<>"']/g, "");
+  const recipientName = item.name || "";
+  const title = item.organization || item.name || "문의";
+  const subject = encodeURIComponent(`Winglia 문의 확인 - ${title}`);
+  const body = encodeURIComponent(
+    `안녕하세요. ${recipientName}님,\n\nWinglia에 남겨주신 문의 확인 후 연락드립니다.\n\n문의 내용:\n${item.message || ""}\n\n감사합니다.`
+  );
+
+  return `mailto:${email}?subject=${subject}&body=${body}`;
+}
+
 async function api(path, options = {}) {
   const response = await fetch(path, {
     ...options,
@@ -124,6 +136,7 @@ function renderList() {
 function renderDetail() {
   const item = state.applications.find((application) => application.id === state.selectedId);
   if (!item) return;
+  const mailtoHref = buildMailtoHref(item);
 
   detailPane.innerHTML = `
     <div class="detail-content">
@@ -143,7 +156,7 @@ function renderDetail() {
         </div>
         <div>
           <span>이메일</span>
-          <strong>${escapeHtml(item.email)}</strong>
+          <strong><a class="contact-link" href="${escapeHtml(mailtoHref)}">${escapeHtml(item.email)}</a></strong>
         </div>
         <div>
           <span>연락처</span>
