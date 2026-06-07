@@ -138,6 +138,25 @@ async function updateApplication(req, res) {
   return json(res, 200, { ok: true, application: normalizeRow(result.rows[0]) });
 }
 
+async function deleteApplication(req, res) {
+  const url = new URL(req.url, `https://${req.headers.host || "winglia.local"}`);
+  const id = Number(url.searchParams.get("id"));
+
+  if (!Number.isInteger(id) || id <= 0) {
+    return json(res, 400, { ok: false, message: "삭제할 신청 ID가 올바르지 않습니다." });
+  }
+
+  const result = await withClient((client) =>
+    client.query("delete from applications where id = $1 returning id", [id])
+  );
+
+  if (!result.rowCount) {
+    return json(res, 404, { ok: false, message: "삭제할 신청을 찾을 수 없습니다." });
+  }
+
+  return json(res, 200, { ok: true, id });
+}
+
 module.exports = async function handler(req, res) {
   const session = requireAdmin(req, res);
   if (!session) return;
@@ -145,7 +164,8 @@ module.exports = async function handler(req, res) {
   try {
     if (req.method === "GET") return await listApplications(req, res);
     if (req.method === "PATCH") return await updateApplication(req, res);
-    return json(res, 405, { ok: false, message: "GET 또는 PATCH 요청만 지원합니다." });
+    if (req.method === "DELETE") return await deleteApplication(req, res);
+    return json(res, 405, { ok: false, message: "GET, PATCH 또는 DELETE 요청만 지원합니다." });
   } catch (error) {
     return json(res, 500, { ok: false, message: error.message });
   }

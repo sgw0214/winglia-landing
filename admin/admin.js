@@ -181,6 +181,14 @@ function renderDetail() {
           <span class="save-status" data-save-status>최근 수정 ${formatDate(item.updatedAt)}</span>
         </div>
       </form>
+      <div class="danger-zone">
+        <div>
+          <h3>신청 삭제</h3>
+          <p>처리가 끝났거나 잘못 접수된 신청을 목록에서 삭제합니다.</p>
+        </div>
+        <button class="danger-button" type="button" data-delete-application data-id="${item.id}">삭제</button>
+        <span class="save-status" data-delete-status aria-live="polite"></span>
+      </div>
     </div>
   `;
 }
@@ -268,6 +276,35 @@ detailPane.addEventListener("submit", async (event) => {
     status.className = "save-status error";
     status.textContent = error.message;
   } finally {
+    button.disabled = false;
+  }
+});
+
+detailPane.addEventListener("click", async (event) => {
+  const button = event.target.closest("[data-delete-application]");
+  if (!button) return;
+
+  const id = Number(button.dataset.id);
+  const item = state.applications.find((application) => application.id === id);
+  if (!item) return;
+
+  const label = item.organization || item.name;
+  const confirmed = window.confirm(`${label} 신청을 삭제할까요?\n삭제한 신청은 관리자 목록에서 사라집니다.`);
+  if (!confirmed) return;
+
+  const status = detailPane.querySelector("[data-delete-status]");
+  button.disabled = true;
+  status.className = "save-status";
+  status.textContent = "삭제 중입니다.";
+
+  try {
+    await api(`/api/admin/applications?id=${encodeURIComponent(id)}`, { method: "DELETE" });
+    state.applications = state.applications.filter((application) => application.id !== id);
+    state.selectedId = state.applications[0]?.id || null;
+    renderList();
+  } catch (error) {
+    status.className = "save-status error";
+    status.textContent = error.message;
     button.disabled = false;
   }
 });
